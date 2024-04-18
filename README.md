@@ -40,6 +40,9 @@ class GRU(nn.Module):
         return out
 ```
 
+**Note:** Hidden_dim tạo ra các hidden_layer như ở trong CNN, số lượng layer càng lớn mô hình càng phức tạp
+
+=> Thử nghiệm mô hình với các hidden_layer xem các mô hình phức tạp hơn liệu có khác nhau về kết quả huấn luyện mô hình trên tập train và valid
 ## LSTM 
 
 <div align="center">
