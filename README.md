@@ -1,7 +1,9 @@
 # Compare LSTM and GRU (BTC)
 
 <<<<<<< HEAD
+
 ## LSTM
+
 =======
 Sử dụng pytorch để scratch mô hình LSTM và GRU để dự đoán giá BTC sử dụng dữ liệu từ tháng 9/2014 - 4/2024
 
@@ -19,35 +21,36 @@ class LSTM(nn.Module):
     def forward(self, x):
         h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_dim).to(device)
         c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_dim).to(device)
-        
+
         out, (hn, cn) = self.lstm(x, (h0, c0))
         out = self.fc(out[:, -1, :])
         return out
 ```
 
 **GRU**
+
 ```python
 class GRU(nn.Module):
     def __init__(self, input_dim, hidden_dim, num_layers, output_dim):
         super(GRU, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        
+
         self.gru = nn.GRU(input_dim, hidden_dim, num_layers, batch_first=True)
         self.fc = nn.Linear(hidden_dim, output_dim)
 
     def forward(self, x):
         h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_dim).requires_grad_().to(device)
         out, (hn) = self.gru(x, (h0.detach()))
-        out = self.fc(out[:, -1, :]) 
+        out = self.fc(out[:, -1, :])
         return out
 ```
 
 **Note:** Hidden_dim tạo ra các hidden_layer như ở trong CNN, số lượng layer càng lớn mô hình càng phức tạp
 
 => Thử nghiệm mô hình với các hidden_layer xem các mô hình phức tạp hơn liệu có khác nhau về kết quả huấn luyện mô hình trên tập train và valid
-## LSTM 
->>>>>>> ef23ec3fed9934ee802b6533ff1abb993d15b867
+
+## LSTM
 
 <div align="center">
 <img src="images\loss(1,50,3,120).png" width="350" height="250"><br>Sử dụng hidden_dim = 3<br>
